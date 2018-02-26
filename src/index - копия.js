@@ -1,6 +1,6 @@
 'use strict'
-module.exports = function check(str, brackets) {
-//function check(str, brackets) {
+//module.exports = function check(str, brackets) {
+function check(str, brackets) {
     var stack = [];
     var reverseStack = [];
     var singleStack = [];
@@ -44,16 +44,20 @@ module.exports = function check(str, brackets) {
                 singleStack.push(str[i]);
             else {
                 if (singleStack[singleStack.length-1] === str[i]) {
-                    var rCount = 0;
+                    reverseStack = [];
                     for (var j = i-1; j=>0; j--) {
                         console.log(str[j]);
-                        if (right.indexOf(str[j]) != -1)
-                            rCount --;
+                        if (right.indexOf(str[j]) != -1) {
+                            alert(100000000000);
+                            reverseStack.push(str[j])}
                         else if (left.indexOf(str[j]) != -1) {
-                            rCount++;
+                            var closedIndex = right.indexOf(reverseStack[reverseStack.length - 1]);
+                            var opened = left[closedIndex];
+                            if (str[j] == opened)
+                                reverseStack.pop();
                         }
                         else if (single.indexOf(str[j]) != -1) {
-                            if (rCount) {
+                            if (reverseStack.length) {
                                 //console.log(right);
                                 //console.log(reverseStack);
                                 //console.log(str.slice(j, i-j))
@@ -95,12 +99,10 @@ function bracketsConfig(arr) {
     return [left, right, single]
 }
 
-/*
 var config1 = [['(', ')'], ['|', '|']];
 var inp1 = '|(|)';
 var config2 = [['(', ')'], ['|', '|']];;
 var inp2 = '|()|';
 var inp3 = '||';
 
-alert(check(inp3, config2));
-*/
+alert(check(inp1, config1));
